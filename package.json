@@ -1,0 +1,84 @@
+{
+  "name": "musikaos-blitz",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "blitz start",
+    "studio": "blitz db studio",
+    "build": "blitz build",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "start:production": "blitz start --production --port $PORT",
+    "heroku-postbuild": "blitz db migrate && blitz build"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "prisma": {
+    "schema": "db/schema.prisma"
+  },
+  "prettier": {
+    "semi": true,
+    "printWidth": 100
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc && lint-staged && pretty-quick --staged",
+      "pre-push": "npm run lint"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@prisma/cli": "2.11.0",
+    "@prisma/client": "2.11.0",
+    "@tonejs/midi": "2.0.25",
+    "blitz": "0.25.1-canary.3",
+    "country-emoji": "1.5.4",
+    "faker": "5.1.0",
+    "final-form": "4.20.1",
+    "react": "0.0.0-experimental-7f28234f8",
+    "react-dom": "0.0.0-experimental-7f28234f8",
+    "react-error-boundary": "2.3.2",
+    "react-final-form": "6.5.2",
+    "secure-password": "4.0.0",
+    "tailwindcss": "1.9.6",
+    "web-midi-player": "1.4.1",
+    "zod": "1.11.10"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.11.5",
+    "@testing-library/react": "11.1.1",
+    "@testing-library/react-hooks": "3.4.2",
+    "@types/jest": "26.0.15",
+    "@types/react": "16.9.56",
+    "@types/secure-password": "3.1.0",
+    "@typescript-eslint/eslint-plugin": "4.6.1",
+    "@typescript-eslint/parser": "4.6.1",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.13.0",
+    "eslint-config-react-app": "5.2.1",
+    "eslint-plugin-flowtype": "5.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "husky": "4.3.0",
+    "jest": "26.6.3",
+    "jest-environment-jsdom-fourteen": "1.0.1",
+    "jest-watch-typeahead": "0.6.1",
+    "lint-staged": "10.5.1",
+    "postcss-preset-env": "6.7.0",
+    "prettier": "2.1.2",
+    "pretty-quick": "3.1.0",
+    "react-test-renderer": "16.14.0",
+    "stylelint": "13.8.0",
+    "stylelint-config-standard": "20.0.0",
+    "ts-jest": "26.4.4",
+    "typescript": "4.0.5"
+  },
+  "private": true
+}

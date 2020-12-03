@@ -1,0 +1,29 @@
+.btn-blue {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+}
+.btn-purple {
+  @apply transition-colors duration-100 border border-purple-600 text-purple-600 rounded px-3 py-2;
+}
+.btn-purple:hover {
+  @apply bg-purple-600 text-white;
+}
+.btn-purple-disabled {
+  @apply transition-colors duration-100 border border-purple-300 bg-purple-300 rounded px-3 py-2 text-white cursor-not-allowed;
+}
+
+.btn-pink {
+  @apply transition-colors duration-100 border border-pink-600 text-pink-600 rounded px-2 py-1;
+}
+.btn-pink:hover {
+  @apply bg-pink-600 text-white;
+}
+.btn-pink-disabled {
+  @apply transition-colors duration-100 border border-pink-300 bg-pink-300 rounded px-2 py-1 text-white cursor-not-allowed;
+}
+
+.link-pink {
+  @apply outline-none text-pink-500;
+}
+.link-pink:hover {
+  @apply underline;
+}

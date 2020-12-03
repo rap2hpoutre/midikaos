@@ -1,0 +1,12 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Midifile",
+      "field": "artist",
+      "type": "String",
+      "arity": "Optional"
+    }
+  ]
+}
