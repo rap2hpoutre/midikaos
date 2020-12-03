@@ -75,6 +75,6 @@ const ShowFiltersPage: BlitzPage = () => {
   );
 };
 
-ShowFiltersPage.getLayout = (page) => <Layout title={"Midifile"}>{page}</Layout>;
+ShowFiltersPage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default ShowFiltersPage;

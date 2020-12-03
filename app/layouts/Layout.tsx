@@ -6,11 +6,11 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-const Layout = ({ title, children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>{title || "musikaos-blitz"}</title>
+        <title>Midikaos</title>
         <link rel="icon" href="/favicon.ico" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0193GBL6XD"></script>
         <script
@@ -33,7 +33,7 @@ const Layout = ({ title, children }: LayoutProps) => {
             <a href="/">Midikaos</a>
           </h1>
           <span className="sm:visible invisible mt-2 ml-3 text-gray-700">
-            A Standards MIDI File Library
+            A Standard MIDI Files Library
           </span>
         </div>
 

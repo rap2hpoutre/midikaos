@@ -209,6 +209,6 @@ const MidifilesPage: BlitzPage = () => {
   );
 };
 
-MidifilesPage.getLayout = (page) => <Layout title={"Midifiles"}>{page}</Layout>;
+MidifilesPage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default MidifilesPage;

@@ -57,6 +57,6 @@ const AboutPage: BlitzPage = () => {
   );
 };
 
-AboutPage.getLayout = (page) => <Layout title={"Midifile"}>{page}</Layout>;
+AboutPage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default AboutPage;

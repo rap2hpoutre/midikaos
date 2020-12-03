@@ -35,6 +35,6 @@ const NewMidifilePage: BlitzPage = () => {
   );
 };
 
-NewMidifilePage.getLayout = (page) => <Layout title={"Create New Midifile"}>{page}</Layout>;
+NewMidifilePage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default NewMidifilePage;

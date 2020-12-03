@@ -53,6 +53,6 @@ const EditMidifilePage: BlitzPage = () => {
   );
 };
 
-EditMidifilePage.getLayout = (page) => <Layout title={"Edit Midifile"}>{page}</Layout>;
+EditMidifilePage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default EditMidifilePage;

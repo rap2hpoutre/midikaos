@@ -97,6 +97,6 @@ const ShowMidifilePage: BlitzPage = () => {
   );
 };
 
-ShowMidifilePage.getLayout = (page) => <Layout title={"Midifile"}>{page}</Layout>;
+ShowMidifilePage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default ShowMidifilePage;
