@@ -22,6 +22,16 @@ const Layout = ({ children }: LayoutProps) => {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+
+        <meta property="og:title" content="Midikaos - MIDI Files Library" />
+        <meta
+          property="og:description"
+          content="A Standard MIDI Files Library with 3K tracks from the end of the 20th century."
+        />
+        <meta property="og:image" content="http://midikaos.mnstrl.org/circuit.svg" />
+        <meta property="og:url" content="http://midikaos.mnstrl.org/" />
+        <meta name="twitter:card" content="summary_large_image"></meta>
+
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0193GBL6XD"></script>
         <script
           dangerouslySetInnerHTML={{
