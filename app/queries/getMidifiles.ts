@@ -33,7 +33,6 @@ export default async function getMidifiles(
   }
   const limit = `limit $${++i} offset $${++i}`;
 
-  console.log([...names.map((name) => `%${name}%`), ...tags, ...instruments, take, skip]);
   const midifiles = await db.$queryRaw<Midifile[]>(
     `select * from "Midifile" where 1=1 ${whereParts.join("\n")} order by id desc ${limit}`,
     ...params,

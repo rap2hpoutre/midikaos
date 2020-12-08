@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSearchDescription xmlns:moz="http://www.mozilla.org/2006/browser/search/" xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Midikaos</ShortName>
+  <Description>Listen to free MIDI songs, download MIDI files, and share the best MIDIs on the web.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image height="48" width="48" type="image/x-icon">https://midikaos.mnstrl.org/favicon.ico</Image>
+  <Url type="text/html" method="GET" template="https://midikaos.mnstrl.org/?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://midikaos.mnstrl.org/opensearch.xml"/>
+  <moz:SearchForm>https://midikaos.mnstrl.org</moz:SearchForm>
+</OpenSearchDescription>

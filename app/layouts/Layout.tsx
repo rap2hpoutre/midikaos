@@ -2,28 +2,37 @@ import { ReactNode } from "react";
 import { Head, Link } from "blitz";
 
 type LayoutProps = {
+  description?: string;
   title?: string;
   children: ReactNode;
 };
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, title = "MIDI Files Library", description }: LayoutProps) => {
+  if (!description) {
+    description =
+      "A Standard MIDI Files Library with 3K tracks collected by a music teacher at the end of the 20th century";
+  }
+  const fullTitle = `Midikaos - ${title}`;
   return (
     <>
       <Head>
-        <title>Midikaos - MIDI Files Library</title>
-        <meta
-          name="description"
-          content="A Standard MIDI Files Library with 3K tracks collected by a music teacher at the end of the 20th century"
-        />
+        <title>{fullTitle}</title>
+        <meta name="description" content={description} />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <link
+          rel="search"
+          href="/opensearch.xml"
+          type="application/opensearchdescription+xml"
+          title="Midikaos"
+        />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
 
-        <meta property="og:title" content="Midikaos - MIDI Files Library" />
+        <meta property="og:title" content={fullTitle} />
         <meta
           property="og:description"
           content="A Standard MIDI Files Library with 3K tracks from the end of the 20th century."
@@ -35,11 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0193GBL6XD"></script>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-0193GBL6XD');`,
+            __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-0193GBL6XD');`,
           }}
         ></script>
       </Head>

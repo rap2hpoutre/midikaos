@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import Layout from "app/layouts/Layout";
-import { useQuery, BlitzPage, useRouter } from "blitz";
+import { useRouter } from "blitz";
 import getTags from "app/queries/getTags";
 import getInstruments from "app/queries/getInstruments";
 import { LinkItem } from "app/components/FilterLinks";
@@ -8,9 +8,8 @@ import updateFilter from "utils/update-filter";
 
 export const Midifile = () => {};
 
-function Tags() {
+function Tags({ tags }) {
   const router = useRouter();
-  const [tags] = useQuery(getTags, {});
   function handleClick(search) {
     router.push({ pathname: "/", query: { search } });
   }
@@ -31,9 +30,8 @@ function Tags() {
   );
 }
 
-function Instruments() {
+function Instruments({ instruments }) {
   const router = useRouter();
-  const [instruments] = useQuery(getInstruments, {});
   function handleClick(search) {
     router.push({ pathname: "/", query: { search } });
   }
@@ -54,17 +52,17 @@ function Instruments() {
   );
 }
 
-const ShowFiltersPage: BlitzPage = () => {
+const ShowFiltersPage = ({ initialValues }) => {
   const router = useRouter();
   return (
     <div className="m-5">
       <h2 className="text-xl my-5 font-bold">Index of Tags</h2>
       <Suspense fallback={<div className="text-gray-500 animate-pulse">Loading...</div>}>
-        <Tags />
+        <Tags tags={initialValues.tags} />
       </Suspense>
       <h2 className="text-xl my-5 font-bold">Index of Instruments</h2>
       <Suspense fallback={<div className="text-gray-500 animate-pulse">Loading...</div>}>
-        <Instruments />
+        <Instruments instruments={initialValues.instruments} />
       </Suspense>
       <p>
         <button className="btn-purple my-10" onClick={() => router.back()}>
@@ -75,6 +73,14 @@ const ShowFiltersPage: BlitzPage = () => {
   );
 };
 
-ShowFiltersPage.getLayout = (page) => <Layout>{page}</Layout>;
+ShowFiltersPage.getLayout = (page) => (
+  <Layout description="Browse MIDI files index by tags and by instruments">{page}</Layout>
+);
+
+export async function getStaticProps() {
+  const tags = await getTags({});
+  const instruments = await getInstruments({});
+  return { props: { initialValues: { tags, instruments } } };
+}
 
 export default ShowFiltersPage;

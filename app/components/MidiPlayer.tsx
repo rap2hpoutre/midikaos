@@ -34,7 +34,6 @@ export default function MidiPlayer({ url, duration }: MidiPlayerProps) {
       setMidiPlayer(
         new OriginalMidiPlayer({
           eventLogger: ({ event, time }) => {
-            console.log(event);
             if (event === "MIDI_PLAY") {
               setTime(time);
               setIsLoading(false);

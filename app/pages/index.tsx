@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Layout from "app/layouts/Layout";
 import MidifileItem from "app/components/MidifileItem";
-import { useQuery, usePaginatedQuery, useRouter, BlitzPage, Link } from "blitz";
+import { useQuery, usePaginatedQuery, useRouter, Link } from "blitz";
 import getMidifiles from "app/queries/getMidifiles";
 import getRandomMidifiles from "app/queries/getRandomMidifiles";
 import whereFromQuery from "utils/where-from-query";
@@ -81,6 +81,27 @@ function NoResults({ setSearch }) {
   );
 }
 
+function FakeDocuments() {
+  return (
+    <div className="animate-pulse opacity-50">
+      <div className="flex justify-end mr-5 text-sm text-gray-200">... results</div>
+      <ul>
+        {[0, 1, 2, 3, 4, 5].map((k) => (
+          <li className="border border-gray-400 shadow-md m-5 p-5 rounded-md">
+            <div className="h-5 bg-pink-200 m-2 rounded w-48"></div>
+            <div className="text-sm">
+              <div className="h-4 bg-gray-300  m-2 rounded w-1/4"></div>
+              <div className="h-4 bg-gray-300  m-2 rounded w-32"></div>
+              <div className="h-4 bg-gray-300  m-2 rounded w-16"></div>
+              <div className="h-4 bg-gray-300  m-2 rounded w-3/4"></div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function Documents({
   midifiles,
   count,
@@ -122,7 +143,43 @@ function Documents({
   );
 }
 
-export const MidifilesList = () => {
+export const MidifilesList = ({
+  search,
+  page,
+  handleFilter,
+  goToPreviousPage,
+  goToNextPage,
+  setSearch,
+}) => {
+  const [{ midifiles, hasMore, count }] = usePaginatedQuery(getMidifiles, {
+    where: whereFromQuery(search),
+    orderBy: { id: "asc" },
+    skip: ITEMS_PER_PAGE * page,
+    take: ITEMS_PER_PAGE,
+  });
+
+  return (
+    <div>
+      {count ? (
+        <Documents
+          midifiles={midifiles}
+          count={count}
+          handleFilter={handleFilter}
+          page={page}
+          goToPreviousPage={goToPreviousPage}
+          hasMore={hasMore}
+          goToNextPage={goToNextPage}
+        />
+      ) : (
+        <Suspense fallback={<div className="m-5 text-gray-500 animate-pulse">Loading...</div>}>
+          <NoResults setSearch={setSearch} />
+        </Suspense>
+      )}
+    </div>
+  );
+};
+
+const MidifilesPage = () => {
   const router = useRouter();
   const [page, setPage] = useState(Number(router.query.page) || 0);
   const [search, setSearch] = useState(router.query.search || "");
@@ -130,16 +187,11 @@ export const MidifilesList = () => {
     setPage(Number(router.query.page) || 0);
     setSearch(router.query.search || "");
   }, [router]);
+
   useEffect(() => {
     router.push({ query: { page, search } });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, search]);
-  const [{ midifiles, hasMore, count }] = usePaginatedQuery(getMidifiles, {
-    where: whereFromQuery(search),
-    orderBy: { id: "asc" },
-    skip: ITEMS_PER_PAGE * page,
-    take: ITEMS_PER_PAGE,
-  });
 
   const goToPreviousPage = () => setPage(page - 1);
   const goToNextPage = () => setPage(page + 1);
@@ -180,30 +232,15 @@ export const MidifilesList = () => {
           list={["greece", "japan", "iran", "venezuela", "algeria", "bulgaria", "peru"]}
         />
       </div>
-      {count ? (
-        <Documents
-          midifiles={midifiles}
-          count={count}
+      <Suspense fallback={<FakeDocuments />}>
+        <MidifilesList
           handleFilter={handleFilter}
           page={page}
+          search={search}
+          setSearch={setSearch}
           goToPreviousPage={goToPreviousPage}
-          hasMore={hasMore}
           goToNextPage={goToNextPage}
         />
-      ) : (
-        <Suspense fallback={<div className="m-5 text-gray-500 animate-pulse">Loading...</div>}>
-          <NoResults setSearch={setSearch} />
-        </Suspense>
-      )}
-    </div>
-  );
-};
-
-const MidifilesPage: BlitzPage = () => {
-  return (
-    <div>
-      <Suspense fallback={<div className="m-5 text-gray-500 animate-pulse">Loading...</div>}>
-        <MidifilesList />
       </Suspense>
     </div>
   );
