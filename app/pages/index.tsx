@@ -68,7 +68,7 @@ function NoResults({ setSearch }) {
           Try one of these random tracks:
           <ul className="list-disc pl-5">
             {midifiles.map((midifile) => (
-              <li>
+              <li key={midifile.id}>
                 <Link href="/midifiles/[midifileId]" as={`/midifiles/${midifile.id}`}>
                   <a className="link-pink">{midifile.name}</a>
                 </Link>
@@ -87,7 +87,7 @@ function FakeDocuments() {
       <div className="flex justify-end mr-5 text-sm text-gray-200">... results</div>
       <ul>
         {[0, 1, 2, 3, 4, 5].map((k) => (
-          <li className="border border-gray-400 shadow-md m-5 p-5 rounded-md">
+          <li className="border border-gray-400 shadow-md m-5 p-5 rounded-md" key={k}>
             <div className="h-5 bg-pink-200 m-2 rounded w-48"></div>
             <div className="text-sm">
               <div className="h-4 bg-gray-300  m-2 rounded w-1/4"></div>
